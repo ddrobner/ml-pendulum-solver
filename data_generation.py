@@ -20,7 +20,7 @@ def dy(y, t, length_g):
     return dy
 
 # set up our sample space
-t = np.linspace(0, 60, 4000)
+t = np.linspace(0, 60, 8000)
 y_0 = [np.pi-0.1, 0]
 """
 #this block was testing the method I was using
@@ -38,7 +38,7 @@ periods = np.empty(len(length))
 
 k = 0
 for l in length:
-    sol_l = odeint(dy, y_0, t, args=((g/l),))
+    sol_l = odeint(dy, y_0, t, args=((g/l),), hmax=0.001)
     fft = np.fft.rfft(sol_l[:, 0])
     freq = np.fft.rfftfreq(len(sol_l[:, 0]), t[1]-t[0])
     mag = abs(fft)
